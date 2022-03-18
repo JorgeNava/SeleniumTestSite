@@ -42,7 +42,7 @@ Link para conectarse a la Base de Datos:
 GitHub Desktop: https://desktop.github.com (Iniciar sesión con cuenta de GitHub)
 
 
-¿COMO INSTALAR Y CORRER DESDE 0?
+¿COMO INSTALAR Y CORRER DESDE CERO?
 
 Descargar todas las aplicaciones descritas arriba en la sección de HERRAMIENTAS
 

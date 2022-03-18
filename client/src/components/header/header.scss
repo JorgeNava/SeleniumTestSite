@@ -1,0 +1,40 @@
+/*HEADER*/
+.header{
+  display: flex;
+  justify-content: flex-end;   /* adjustment */
+  position: relative;            /* new */
+  margin-bottom: 2vh;
+}
+.header__logo{
+  margin: 3rem 0;
+  flex: 0 1 auto;
+  position: absolute;             /* new */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.header a:hover{
+  cursor: pointer;
+}
+.loginIcon, .purchaseIcon{
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  margin-top: 3vh; 
+  margin-right: 2vw;
+  margin-bottom: 3vw;
+  align-items: center;
+  img{
+    width: 40px;
+    height: 40px;
+  }
+  p{
+    margin: 0;
+    font-size: 1.7rem;
+    color: black;
+  }
+  p:hover{
+    color: white;
+  }
+}
+.purchaseIcon{
+}

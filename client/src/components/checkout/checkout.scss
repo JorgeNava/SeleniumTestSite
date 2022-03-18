@@ -1,0 +1,45 @@
+
+.formulario__submit{
+
+  background-color: var(--secundario);
+  border: none;
+  font-size: 2rem;
+  font-family: var(--fuentePrincipal);
+  padding: 2rem;
+  transition: background-color .3s ease;
+  margin-top: 2rem;
+  width: 100%;
+
+}
+.formulario__submitpago{
+
+  background-color: var(--secundario);
+  border: none;
+  font-size: 2rem;
+  font-family: var(--fuentePrincipal);
+  padding: 2rem;
+  transition: background-color .3s ease;
+  margin-top: 2rem;
+  width: 20%;
+
+}
+.formulario__submitpagox{
+
+  background-color: var(--primarioOscuro);
+  border: none;
+  font-size: 2rem;
+  font-family: var(--blanco);
+  padding: 2rem;
+  transition: background-color .3s ease;
+  margin-top: 2rem;
+  width: 20%;
+
+}
+.formulario__submit:hover{
+  cursor: pointer;
+  background-color: var(--secundarioOscuro);
+}
+
+.submitButtonCheckout{
+  color: white;
+}

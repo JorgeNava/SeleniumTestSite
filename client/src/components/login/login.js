@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './login.scss';
 
 export default function Login(props) {
@@ -10,9 +10,11 @@ export default function Login(props) {
   const [usernameLogin, setUsernameLogin] = useState('')
   const [passwordLogin, setPasswordLogin] = useState('')
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     const config = {
       url: 'http://localhost:3002/users/login',
       method: 'POST',
@@ -24,19 +26,20 @@ export default function Login(props) {
       .then((resp) => {
         setIsSubmitted(true);
         localStorage.setItem("User", JSON.stringify(resp.data));
+        navigate('/home')
       })
       .catch(function (error) {
         console.log("Error: ", error);
         setErrorMessages({ name: "pass", message: "Invalid credentials" });
       });
-  };
-
-  const renderErrorMessage = (name) =>
+    };
+    
+    const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
-    );
-
-  const renderForm = (
+      );
+      
+      const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">

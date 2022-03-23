@@ -1,4 +1,16 @@
-.productsContainer{
-  display: flex;
-  justify-content: center;
+.homeListItem{
+  color: white;
+  text-decoration: none;
+
+  &:hover{
+    color: var(--secundario);
+  }
+}
+
+.request{
+  border: 3px solid black;
+  &:hover{
+    border: 3px solid var(--secundario);
+    cursor: pointer;
+  }
 }

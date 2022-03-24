@@ -27,15 +27,15 @@ class App extends Component {
       <Router>
         <Header />
           <Routes>
-            <Route exact path='/' element={<Home />}></Route>
-            <Route exact path='/login' element={< Login />}></Route>
+            <Route exact path='/' element={<Login />}></Route>
+            <Route exact path='/home' element={<Home />}></Route>
             <Route exact path='/register' element={< Register />}></Route>
             <Route path='products/:internalId' element={< Products />}></Route>
             <Route exact path='/checkout' element={< Checkout />}></Route>
             <Route exact path='/purchases' element={< Purchases />}></Route>
           </Routes>
         <Footer />
-        </Router>
+      </Router>
     );
   }
 }

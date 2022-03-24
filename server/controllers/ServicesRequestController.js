@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router();
-const salesService = require('../services/SalesService.js')
+const servicesRequestService = require('../services/ServicesRequestService.js')
 
 router.get('/get-one-by-id', (req, res, next) => {
     const ID = req.body.id;
-    salesService.getOneById(ID)
+    servicesRequestService.getOneById(ID)
         .then(product => {
             res.json(product)
         }
@@ -14,21 +14,29 @@ router.get('/get-one-by-id', (req, res, next) => {
     })
 })
 
-router.get('/get-many-by-buyer-id/:buyerUsername', (req, res, next) => {
-    const BUYER_USERNAME = req.params.buyerUsername;
-    salesService.getManyByBuyerId(BUYER_USERNAME)
-        .then(sales => {
-            res.json(sales)
+router.get('/get-many-by-username/:username', (req, res, next) => {
+    const USERNAME = req.params.username;
+    servicesRequestService.getManyByUsername(USERNAME)
+        .then(requests => {
+            res.json(requests)
         }
-    ).catch(err => {
-        console.log('ERROR: ',err);
+        ).catch(err => {
         next(err)
     })
 })
 
+router.get('/get-all', (req, res, next) => {
+    servicesRequestService.getAll()
+        .then(requests => {
+            res.json(requests)
+        }
+        ).catch(err => {
+        next(err)
+    })
+})
 
 router.post('/save-one', (req, res, next) => {
-    salesService.saveOne(req.body).then(
+    servicesRequestService.saveOne(req.body).then(
         () => res.send('success')
     ).catch(err => {
         console.log("ERROR: ",err)
@@ -38,7 +46,7 @@ router.post('/save-one', (req, res, next) => {
 
 router.post('/delete-one-by-id', (req, res, next) => {
     const ID = req.body.id;
-    salesService.deleteOneById(ID)
+    servicesRequestService.deleteOneById(ID)
         .then(product => {
             res.json(product)
         }

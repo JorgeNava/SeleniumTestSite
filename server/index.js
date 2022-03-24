@@ -17,6 +17,7 @@ app.use(auth.authenticateToken.unless({
     path: [
         { url: '/users/login', methods: ['POST']},
         { url: '/users/register', methods: ['POST']},
+        { url: /^\/users\/getOneByUsername\/.*/, methods: ['GET'] },
         { url: /^\/users\/email\/.*/, methods: ['GET'] },
         { url: /^\/products\/.*/, methods: ['GET'] },
         { url: /^\/sales\/.*/, methods: ['GET','POST'] },

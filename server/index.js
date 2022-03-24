@@ -23,6 +23,7 @@ app.use(auth.authenticateToken.unless({
 app.use(express.json()) 
 app.use('/users', users)
 app.use('/servicesRequest', servicesRequest)
+app.use('/requests', servicesRequest)
 app.use(errors.errorHandler)
 
 const uri = "mongodb://localhost:27017";

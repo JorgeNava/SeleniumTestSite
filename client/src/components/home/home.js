@@ -11,7 +11,7 @@ export default function Home(props) {
   const USER = JSON.parse(localStorage.getItem("User"));
 
   const [selectedItem, setSelectedItem] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState("General");
   const [service, setService] = useState(null);
   const [location, setLocation] = useState(null);
   const [schedule, setSchedule] = useState(null);
@@ -71,6 +71,53 @@ export default function Home(props) {
     getAllRequests();
   }, []); 
 
+  function renderServicesOptions() {
+    console.log('CATEGORY', category);
+    if (category === "General") {
+      return (
+        <select
+          defaultValue="----"
+          className="navegacion__enlace navegacion__enlace--activo"
+          onChange={event => setService(event.target.value)}
+          required
+          >
+          <option value="----">----</option>
+          <option value="Network">Network</option>
+          <option value="Software installation">Software installation</option>
+          <option value="Data backup">Data backup</option>
+          </select>
+      )
+    } else if (category === "Failure") {
+      return (
+        <select
+          defaultValue="----"
+          className="navegacion__enlace navegacion__enlace--activo"
+          onChange={event => setService(event.target.value)}
+          required
+          >
+            <option value="----">----</option>
+            <option value="Mobile">Mobile</option>
+            <option value="System">System</option>
+            <option value="Computer equipment">Computer equipment</option>
+            </select>
+      )
+    } else if (category === "Other") {
+      return (
+        <select
+          defaultValue="----"
+          className="navegacion__enlace navegacion__enlace--activo"
+          onChange={event => setService(event.target.value)}
+          required
+          >
+          <option value="----">----</option>
+          <option value="Data reoirt">Data report</option>
+          <option value="Password change">Password change</option>
+          <option value="Equipment adquisition">Equipment adquisition</option>
+        </select>
+      )
+    }
+  }
+
   function renderServiceRequest() {
     if (selectedItem === "generate") {
       return (
@@ -78,11 +125,20 @@ export default function Home(props) {
           <form onSubmit={handleSubmit}>
             <div className="input-container">
               <label>Category </label>
-              <input type="text" name="category" required onChange={event => setCategory(event.target.value)} />
+              <select
+                  defaultValue="General"
+                  className="navegacion__enlace navegacion__enlace--activo"
+                  onChange={event => setCategory(event.target.value)}
+                  required
+              >
+                  <option value="General">General</option>
+                  <option value="Failure">Failure</option>
+                  <option value="Other">Other</option>
+              </select>
             </div>
             <div className="input-container">
-              <label>Service </label>
-              <input type="text" name="service" required onChange={event => setService(event.target.value)} />
+              <label>Service</label>
+                  {renderServicesOptions()}
             </div>
             <div className="input-container">
               <label>Location</label>
@@ -140,9 +196,10 @@ export default function Home(props) {
       return <h1>LOADING...</h1>
     } else {
       return (allRequests.map((request, index) => {
+        const URL = `/request/${request.internalId}`;
         return (
           <div className="request" key={index}>
-            <Link to="/">
+            <Link to={URL}>
               <p>{request.internalId}</p>
               <p>{request.username}</p>
               <p>{request.status}</p>
@@ -157,19 +214,19 @@ export default function Home(props) {
   return (
     <div>
       <main className="contenedor">
-        <h1>Operaciones de Servicios</h1>
+        <h1>Services Operations</h1>
         {
           USER.username === "admin" ?
             (<div>
               <h1>REQUESTS</h1>
-              <p onClick={exitApp} className="homeListItem">Salir</p>
+              <p onClick={exitApp} className="homeListItem">Logout</p>
               {renderAdminRequests()}
             </div>) :
           ( <div>
             <ul className="homeNav">
-              <li onClick={() => { setSelectedItem("generate") }} className="homeListItem">Solicitud de Servicio</li>
-              <li onClick={() => { setSelectedItem("show") }} className="homeListItem">Ver Solicitudes</li>
-              <li onClick={() => { setSelectedItem("exit") }} className="homeListItem">Salir</li>
+              <li onClick={() => { setSelectedItem("generate") }} className="homeListItem">Request Service</li>
+              <li onClick={() => { setSelectedItem("show") }} className="homeListItem">Show requests</li>
+              <li onClick={() => { setSelectedItem("exit") }} className="homeListItem">Logout</li>
             </ul>
             {renderServiceRequest()}
           </div>)

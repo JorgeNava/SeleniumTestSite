@@ -14,6 +14,19 @@ router.get('/get-one-by-id', (req, res, next) => {
     })
 })
 
+router.get('/get-one-by-internal-id/:internalId', (req, res, next) => {
+    const INTERNAL_ID = req.params.internalId;
+    servicesRequestService.getOneByInternalId(INTERNAL_ID)
+        .then(requests => {
+            res.json(requests)
+        }
+    ).catch(err => {
+        console.log('ERROR: ',err);
+        next(err)
+    })
+})
+
+
 router.get('/get-many-by-username/:username', (req, res, next) => {
     const USERNAME = req.params.username;
     servicesRequestService.getManyByUsername(USERNAME)
@@ -37,6 +50,15 @@ router.get('/get-all', (req, res, next) => {
 
 router.post('/save-one', (req, res, next) => {
     servicesRequestService.saveOne(req.body).then(
+        () => res.send('success')
+    ).catch(err => {
+        console.log("ERROR: ",err)
+        next(err)
+    })
+})
+
+router.post('/update-one', (req, res, next) => {
+    servicesRequestService.updateOne(req.body).then(
         () => res.send('success')
     ).catch(err => {
         console.log("ERROR: ",err)

@@ -4,17 +4,26 @@ var mongoose = require('mongoose');
 
 async function getOneById(id) {
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
-        const sale = await ServicesRequest.findById(id);
-        return sale.toJSON()
+        const service = await ServicesRequest.findById(id);
+        return service.toJSON()
     }
     return "[ERROR] ServicesRequest - getOneById"
 }
 
 async function deleteOneById(id) {
-    const ServicesRequest = await ServicesRequest.deleteOne({ _id: mongoose.Types.ObjectId(id) }, function (err) {
+    const service = await ServicesRequest.deleteOne({ _id: mongoose.Types.ObjectId(id) }, function (err) {
         if (err) return err
     });
-    return ServicesRequest
+    return service
+}
+
+async function getOneByInternalId(id) {
+    const service = await ServicesRequest.findOne({ internalId: id });
+    if (service) {
+        return service.toJSON()
+    } else {
+        return {}
+    }
 }
 
 async function getManyByUsername(username) {
@@ -35,18 +44,15 @@ async function getAll() {
     }
 }
 
-async function getOneByInternalId(internalId) {
-    const servicesRequest = await ServicesRequest.find({ internalId:  mongoose.Types.ObjectId(internalId) });
-    if (servicesRequest) {
-        return servicesRequest
-    } else {
-        return "[ERROR] ServicesRequest  - getOneByInternalId"
-    }
-}
-
 async function saveOne(params) {
     const servicesRequest = new ServicesRequest(params)
     await servicesRequest.save();
+}
+
+async function updateOne(params) {
+    await ServicesRequest.findOneAndUpdate({ internalId: params.internalId }, {status: params.status},{
+        new: false
+    })
 }
 
 
@@ -56,5 +62,6 @@ module.exports = {
     getManyByUsername,
     getOneByInternalId,
     deleteOneById,
-    saveOne
+    saveOne,
+    updateOne
 };

@@ -78,13 +78,13 @@ export default function Register(props) {
   return (
     <div className="registerContainer">
       <div className="login-form">
-        <div className="title"><Link className="secondTitle" to="/login">Sign In</Link> / Sign up</div>
+        <div className="title"><Link className="secondTitle" to="/">Sign In</Link> / Sign up</div>
         {isSubmitted ?
           <div id="sucessMessage">
             <div>
               User has successfully signed up!
             </div>
-            <Link id="loginButton" centered to="/login">Log in</Link>
+            <Link id="loginButton" centered to="/">Log in</Link>
         </div> : renderForm}
       </div>
     </div>

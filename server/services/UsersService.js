@@ -40,9 +40,16 @@ async function getOneByEmail(email) {
     return "[ERROR] UserService - getByEmail"
 }
 
+async function getOneByUsername(username) {
+    const user = await Users.findOne({ username: username });
+    return user.toJSON()
+    //return "[ERROR] UserService - getByUsername"
+}
+
 module.exports = {
     login,
     register,
     getOneById,
-    getOneByEmail
+    getOneByEmail,
+    getOneByUsername
 };

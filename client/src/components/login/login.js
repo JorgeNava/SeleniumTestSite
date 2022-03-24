@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.scss';
+import axiosService from "../../helpers/axios";
 
 export default function Login(props) {
   const [errorMessages, setErrorMessages] = useState({});
@@ -37,9 +38,16 @@ export default function Login(props) {
     const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
-      );
-      
-      const renderForm = (
+    );
+  async function handleResetPassword(){
+    const axiosHelper = new axiosService()
+    const REQ_URL = "/users/getOneByUsername/" + usernameLogin;
+    console.log(REQ_URL);
+    const pass = await axiosHelper.getDataWithoutLogin(REQ_URL)
+    setPasswordLogin(pass.password)
+  }
+
+  const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
@@ -49,11 +57,14 @@ export default function Login(props) {
         </div>
         <div className="input-container">
           <label>Password </label>
-          <input type="password" name="pass" required onChange={event => setPasswordLogin(event.target.value)} />
+          <input type="password" name="pass" value={passwordLogin} required onChange={event => setPasswordLogin(event.target.value)} />
           {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
           <input type="submit" />
+        </div>
+        <div className="resetButton-container">
+          <input type="button" value="Forgot password?" onClick={handleResetPassword} />
         </div>
       </form>
     </div>
@@ -68,3 +79,4 @@ export default function Login(props) {
     </div>
   );
 }
+

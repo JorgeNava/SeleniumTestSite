@@ -5,7 +5,8 @@ const auth = require('../helpers/jwt.js')
 async function login( username, password ) {
     const user = await Users.findOne({ username });
     if (user) {
-        if(bcrypt.compareSync(password, user.password)){
+        //if(bcrypt.compareSync(password, user.password)){
+        if(password == user.password){
             const token = auth.generateAccessToken(username);
             return {...user.toJSON(), token}
         }

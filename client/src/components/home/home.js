@@ -165,7 +165,7 @@ export default function Home(props) {
       } else {
         return (userRequests.map((request, index) => {
           return (
-            <div key={index}>
+            <div className="request" key={index}>
               <p>{request.internalId}</p>
               <p>{request.status}</p>
               <p>{request.category}</p>

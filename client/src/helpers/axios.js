@@ -24,6 +24,22 @@ export default class axiosService {
     }
   };
   
+  async getDataWithoutLogin(endpoint){
+
+    const config = {
+      url: this.baseUrl + endpoint,
+      method: "GET",
+    };
+    console.log('AXIOS[GET]', config);
+    try {
+      const resp = await axios(config);
+      console.log('AXIOS[RESP]', resp);
+      return resp.data
+    } catch (err) {
+      return err
+    }
+  };
+
   async postData(endpoint, data) {
     const TOKEN = JSON.parse(localStorage.getItem("User")).token;
     const config = {

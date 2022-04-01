@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs')
 const usersService = require('../services/UsersService.js')
 
 router.post('/register', (req, res, next) => {
-    const { password } = req.body
-    const salt = bcrypt.genSaltSync(10);
-    req.body.password = bcrypt.hashSync(password, salt);
+    // const { password } = req.body
+    // const salt = bcrypt.genSaltSync(10);
+    // req.body.password = bcrypt.hashSync(password, salt);
 
     usersService.register(req.body).then(
         () => res.send('success')
@@ -31,6 +31,15 @@ router.post('/login', (req, res, next) => {
 
 router.get('/email/:email', (req, res, next) => {
     usersService.getOneByEmail(req.params.email).then(
+        (user) => res.json(user)
+    ).catch(err => {
+        console.log("ERROR: ",err)
+        next(err)
+    })
+})
+
+router.get('/getOneByUsername/:username', (req, res, next) => {
+    usersService.getOneByUsername(req.params.username).then(
         (user) => res.json(user)
     ).catch(err => {
         console.log("ERROR: ",err)

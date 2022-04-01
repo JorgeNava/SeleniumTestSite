@@ -47,7 +47,7 @@ export default function Requests(props) {
                             className="navegacion__enlace navegacion__enlace--activo"
                             onChange={event => setRequestStatus(event.target.value)}
                         >
-                            <option value="Requestesd">Requested</option>
+                            <option value="Requested">Requested</option>
                             <option value="In process">In process</option>
                             <option value="Cancelled">Cancelled</option>
                             <option value="Completed">Completed</option>
